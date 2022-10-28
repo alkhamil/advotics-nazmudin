@@ -1,0 +1,85 @@
+$mobile: 900px;
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 34px;
+    height: 100%;
+
+    .logo {
+        display: flex;
+        gap: 6px;
+        .brand {
+            width: 140px
+        }
+
+        .poweredby {
+            display: flex;
+            align-self: flex-end;
+            gap: 4px;
+
+            span {
+                font-size: 12px;
+                font-weight: 300;
+            }
+
+            img {
+                width: 60px;
+            }
+        }
+
+        @media only screen and (max-width: $mobile) {
+            .poweredby {
+                display: none;
+            }
+        }
+    }
+
+    .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .userdata {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .username {
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .companyname {
+                font-size: 12px;
+                font-weight: 300;
+            }
+        }
+
+        @media only screen and (max-width: $mobile) {
+            .userdata {
+                display: none;
+            }
+        }
+
+        .profile  {
+            cursor: pointer;
+            img {
+                width: 32px;
+            }
+        }
+
+        .logout {
+            cursor: pointer;
+            img {
+                width: 16px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $mobile) {
+    .header {
+        padding: 0px 14px;
+    }
+}

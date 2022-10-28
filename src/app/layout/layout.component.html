@@ -1,0 +1,10 @@
+<div class="app-layout">
+    <app-header class="app-header"></app-header>
+    
+    <div class="app-wrapper" [ngClass]="{'collapsed': isCollapsed}">
+        <app-sidebar (onCollapsed)="onListenCollapsed($event)" class="app-sidebar"></app-sidebar>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

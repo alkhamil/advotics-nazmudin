@@ -1,0 +1,302 @@
+$mobile: 900px;
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 30px;
+            font-weight: 600;
+            color: #707070C4;
+        }    
+    }
+
+    @media only screen and (max-width: $mobile) {
+        .title {
+            flex-direction: column;
+
+            .datepicker {
+                width: 100%;
+            }
+        }
+    }
+
+    .insight {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .header {
+            padding: 10px 14px;
+            background-color: #37B04C;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h5 {
+                font-size: 14px;
+                font-weight: 600;
+                color: #fff;
+            }
+
+            .actions {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                .tooltip {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    cursor: pointer;
+
+                    img {
+                        width: 16px;
+                    }
+
+                    span {
+                        text-decoration: underline;
+                        font-size: 12px;
+                        color: #fff;
+                        letter-spacing: 0px;
+                    }
+                }
+
+                .chevron-down {
+                    cursor: pointer;
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+
+            .insight-counting {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(4, minmax(100px, 1fr));
+
+                .card {
+                    background-color: #fff;
+                    box-shadow: 0px 2px 6px #0000000A;
+                    padding: 10px;
+                    border-radius: 4px;
+
+                    .card-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        span {
+                            font-size: 12px;
+                            color: #4D4F5C;
+                        }
+
+                        .ic-more {
+                            cursor: pointer;
+                            width: 10px;
+                        }
+                    }
+
+                    .card-body {
+                        display: flex;
+                        align-items: center;
+                        gap: 16px;
+
+                        .counting-info {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 6px;
+
+                            .amount {
+                                font-size: 18px;
+                                font-weight: 700;
+                                color: #4D4F5C;
+                            }
+
+                            .other {
+                                display: flex;
+                                gap: 4px;
+
+                                .percentage {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 4px;
+
+                                    img {
+                                        width: 10px;
+                                    }
+
+                                    span {
+                                        font-size: 10px;
+                                        font-weight: 600;
+                                        color: #FF4141;
+                                    }
+                                }
+
+                                .description {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: #707070;
+                                }
+                            }
+                        }
+
+                        .counting-icon {
+                            img {
+                                width: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media only screen and (max-width: $mobile) {
+                .insight-counting {
+                    grid-template-columns: repeat(1, minmax(100px, 1fr));
+                }
+            }
+
+            .insight-visual {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: 600px 1fr 1fr;
+
+                .card {
+                    background-color: #fff;
+                    box-shadow: 0px 2px 6px #0000000A;
+                    padding: 10px;
+                    border-radius: 4px;
+
+                    .card-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        span {
+                            font-size: 16px;
+                            color: #4D4F5C;
+                        }
+
+                        .actions {
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+
+                            select {
+                                cursor: pointer;
+                                border: 1px solid #ccc;
+                                border-radius: 2px;
+                                height: 28px;
+                            }
+                        }
+
+                        .ic-more {
+                            cursor: pointer;
+                            width: 10px;
+                        }
+                    }
+
+                    .card-body {
+                        margin-top: 20px;
+
+                        .legends {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            padding: 0 14px;
+
+                            .legend-item {
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+
+                                .box-color {
+                                    width: 20px;
+                                    height: 10px;
+                                    border-radius: 80px;
+                                }
+
+                                span {
+                                    font-size: 12px;
+                                    color: #4D4F5C;
+                                }
+                            }
+                        }
+
+                        .products {
+                            display: flex;
+                            gap: 4px;
+                            flex-direction: column;
+
+                            .product-item {
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                border: 0.5px solid #C5C5C59C;
+                                border-radius: 4px;
+
+                                img {
+                                    width: 60px;
+                                }
+
+                                .product-info {
+                                    width: 100%;
+
+                                    .name {
+                                        font-size: 14px;
+                                        color: #000000DE;
+                                        font-weight: 500;
+                                    }
+
+                                    .product-sell {
+                                        width: 100%;
+                                        display: block;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        padding-right: 20px;
+                                        font-size: 12px;
+                                        color: #00000099;
+                                    }
+                                }
+
+                                &.active {
+                                    background: #FFE7BD;
+
+                                    img {
+                                        width: 100px;
+                                    }
+
+                                    .product-info .name {
+                                        font-size: 16px;
+                                    }
+
+                                    .product-info .product-sell {
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media only screen and (max-width: $mobile) {
+                .insight-visual {
+                    grid-template-columns: repeat(1, minmax(100px, 1fr));
+                }
+            }
+        }
+
+    }
+}

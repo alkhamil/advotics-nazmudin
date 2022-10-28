@@ -1,0 +1,22 @@
+<label class="filter-date" for="input">
+    <div class="label-periode">
+        <img src="assets/images/calendar.png" alt="advotics">
+        <span>Periode</span>
+    </div>
+    <input type="text" id="input" 
+        ngxDaterangepickerMd
+        (ngModelChange)="onChangeDate()"
+        (click)="onClickDate()" 
+        [(ngModel)]="filterDate"
+        [showCustomRangeLabel]="true" 
+        [alwaysShowCalendars]="true"
+        [keepCalendarOpeningWithRange]="true" 
+        [showCancel]="false" 
+        [closeOnAutoApply]="true" 
+        [ranges]="ranges"
+        [readOnly]="true"
+        [maxDate]="maxDate"
+        [linkedCalendars]="true">
+
+    <img src="assets/images/ic-chevron-down-alt.svg" class="chevron-down" alt="advotics">
+</label>

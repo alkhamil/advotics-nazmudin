@@ -1,0 +1,17 @@
+<div class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+    <div class="brand">
+        <div class="toogle" (click)="onClickCollapsed()">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+    <div class="menu-wrapper">
+        <ng-container *ngFor="let item of sidebar">
+            <div class="menu-item" [routerLink]="item.url" routerLinkActive="active">
+                <div class="box-icon">
+                    <img [src]="item.icon" alt="advotics">
+                </div>
+                <span>{{ item.label }}</span>
+            </div>
+        </ng-container>
+    </div>
+</div>

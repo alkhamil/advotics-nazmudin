@@ -1,0 +1,124 @@
+<div class="dashboard">
+    <div class="title">
+        <h4>Dashboard</h4>
+        <app-custom-daterangepicker class="datepicker" (onChangeModel)="onChangeDate($event)"></app-custom-daterangepicker>
+    </div>
+
+    <div class="insight">
+        <div class="header">
+            <h5>MARKET INSIGHTS</h5>
+            <div class="actions">
+                <div class="tooltip">
+                    <img src="assets/images/help.png" alt="advotics">
+                    <span>Click Here for Help</span>
+                </div>
+                <img src="assets/images/ic-chevron-down.svg" class="chevron-down" alt="advotics">
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="insight-counting">
+                <ng-container *ngFor="let item of insightCountingData">
+                    <div class="card">
+                        <div class="card-header">
+                            <span>{{ item.name }}</span>
+                            <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                        </div>
+
+                        <div class="card-body">
+                            <div class="counting-info">
+                                <span class="amount">{{ item.amount | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
+                                <div class="other">
+                                    <span class="percentage">
+                                        <img [src]="item.percentageIcon" alt="advotics">
+                                        <span>{{ item.percentage }}</span>
+                                    </span>
+                                    <span class="description">{{ item.description }}</span>
+                                </div>
+                            </div>
+                            <div class="counting-icon">
+                                <img src="assets/images/sales-turnover.png" alt="advotics">
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="insight-visual">
+                <div class="card">
+                    <div class="card-header">
+                        <span>AVERAGE PURCHASE VALUE</span>
+
+                        <div class="actions">
+                            <select>
+                                <option value="0">Last 6 Month</option>
+                            </select>
+                            <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <canvas class="c-pointer" id="barChart" #barChart></canvas>
+
+                        <div class="legends">
+                            <ng-container *ngFor="let item of barChartLegends">
+                                <div class="legend-item">
+                                    <div class="box-color" [style.background]="item.color"></div>
+                                    <span>{{ item.label }}</span>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span>BEST SELLING SKU</span>
+                        <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="products">
+                            <ng-container *ngFor="let item of bestSellingSKU; let i = index">
+                                <div class="product-item" [ngClass]="{'active': i == 0}">
+                                    <img [src]="item.image" alt="advotics">
+                                    <div class="product-info">
+                                        <span class="name">{{ item.name }}</span>
+                                        <div class="product-sell">
+                                            <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
+                                            <span class="sold">{{ item.sold }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span>TOP COMPETITOR SKU</span>
+                        <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                    </div>
+
+                    <div class="card-body">
+                        <div class="products">
+                            <ng-container *ngFor="let item of topCompetitorSKU; let i = index">
+                                <div class="product-item" [ngClass]="{'active': i == 0}">
+                                    <img [src]="item.image" alt="advotics">
+                                    <div class="product-info">
+                                        <span class="name">{{ item.name }}</span>
+                                        <div class="product-sell">
+                                            <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
+                                            <span class="sold">{{ item.sold }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

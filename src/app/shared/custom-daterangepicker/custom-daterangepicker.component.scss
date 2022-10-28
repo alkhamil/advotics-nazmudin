@@ -1,0 +1,173 @@
+.filter-date {
+    height: 40px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 3px #00000029;
+    border-radius: 2px;
+    padding: 0px 14px;
+    font-size: .8rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .label-periode {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        img {
+            width: 16px;
+        }
+
+        span {
+            font-size: 14px;
+            color: #8B8B8B;
+        }
+    }
+
+    input {
+        outline: 0;
+        border: 0;
+        background: transparent;
+        height: 100%;
+        width: 100%;
+        min-width: 300px;
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #6A6A6A;
+        pointer-events: none;
+    }
+
+    .chevron-down {
+        width: 20px;
+        opacity: .5;
+        transform: rotate(0deg);
+        transition: all ease-in-out .3s;
+        
+        &.rotate {
+            transform: rotate(180deg);
+            transition: all ease-in-out .3s;
+        }
+    }
+}
+
+::ng-deep .md-drppicker {
+    font-family: 'Open Sans', sans-serif !important;
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    grid-template-rows: 40px 1fr 100%;
+    grid-template-areas:
+        "header header header"
+        "ranges calendar-left calendar-right"
+        "footer footer footer";
+    top: auto;
+    left: unset !important;
+    right: 0 !important;
+    margin-top: 26px !important;
+    padding: 14px !important;
+}
+
+::ng-deep .md-drppicker .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-area: header;
+    padding: 0px 10px;
+    margin-top: -10px;
+
+    .label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        img {
+            width: 20px;
+        }
+
+        span {
+            font-size: 16px;
+            font-weight: 600;
+            color: #6A6A6A;
+        }
+    }
+
+    .close {
+        width: 20px;
+        opacity: .5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+::ng-deep .md-drppicker .ranges {
+    border-right: 1px solid #ccc;
+    padding-right: 14px;
+    grid-area: ranges;
+}
+
+::ng-deep .md-drppicker .ranges ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+::ng-deep .md-drppicker .ranges ul li {
+    border-bottom: .5px solid #ccc;
+}
+
+::ng-deep .md-drppicker .ranges ul li button {
+    padding: 12px !important;
+}
+
+::ng-deep .md-drppicker .ranges ul li button:hover {
+    background-color: #D6EDDA !important;
+    border-radius: 2px;
+}
+
+::ng-deep .md-drppicker .ranges ul li button.active {
+    background-color: #31A445 !important;
+    border-radius: 2px;
+}
+
+::ng-deep .md-drppicker td.active {
+    background-color: #31A445 !important;
+    color: #fff !important;
+}
+
+::ng-deep .md-drppicker td.in-range {
+    background-color: #D6EDDA !important;
+    color: #31A445 !important;
+}
+
+::ng-deep .md-drppicker td.end-date {
+    background-color: #31A445 !important;
+    color: #fff !important;
+}
+
+::ng-deep .md-drppicker .calendar.left {
+    grid-area: calendar-left;
+}
+
+::ng-deep .md-drppicker .calendar.right {
+    grid-area: calendar-right;
+}
+
+::ng-deep .md-drppicker .buttons {
+    text-align: left !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    grid-area: footer;
+}
+
+::ng-deep .md-drppicker .buttons .buttons_input {
+    display: flex;
+    gap: 10px;
+}
+
+::ng-deep .md-drppicker .buttons .buttons_input .btn {
+    background-color: #31A445 !important;
+    min-width: calc(150px - 14px);
+}
