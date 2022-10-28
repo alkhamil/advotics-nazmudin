@@ -5,6 +5,8 @@
     .app-header {
         background: #FFFFFF;
         box-shadow: 0px 3px 6px #00000029;
+        position: relative;
+        z-index: 999;
     }
 
     .app-wrapper {
@@ -26,7 +28,8 @@
         .app-content {
             background: #f7f7f7;
             height: inherit;
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             padding: 14px;
         }
     }
