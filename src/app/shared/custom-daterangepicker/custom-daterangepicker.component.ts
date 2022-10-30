@@ -10,7 +10,6 @@ import { DateRange } from './daterange.model';
 export class CustomDaterangepickerComponent implements OnInit {
 
   ranges: any = {
-    'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
@@ -25,7 +24,11 @@ export class CustomDaterangepickerComponent implements OnInit {
   maxDate: moment.Moment = moment();
   minDate: moment.Moment = moment();
 
+  startDate: any;
+  endDate: any;
+
   @Input() filterDate: any;
+  @Input() minRange: number = 2;
   @Output() onChangeModel = new EventEmitter<DateRange>();
 
   isCollapsed: boolean = false;
@@ -38,6 +41,31 @@ export class CustomDaterangepickerComponent implements OnInit {
     this.filterDate = {
       startDate: moment().subtract(6, 'days'),
       endDate: moment()
+    }
+  }
+
+  datesUpdatedStart(range: any) {
+    this.startDate = range.startDate;
+    this.handleDatesUpdated();
+  }
+  
+  datesUpdatedEnd(range: any) {
+    this.endDate = range.endDate;
+    this.handleDatesUpdated();
+  }
+
+  handleDatesUpdated() {
+    const startDate = moment(this.startDate);
+    const endDate = moment(this.endDate);
+    const rangeCount = endDate.diff(startDate, 'days');
+    const mdDrppicker = document.querySelector('.md-drppicker');
+    const buttonApply = mdDrppicker?.querySelector('.buttons .buttons_input .btn');
+    if (rangeCount < this.minRange) {
+      buttonApply?.setAttribute('disabled', 'disabled');
+      buttonApply?.setAttribute('style', 'cursor: not-allowed');
+    } else {
+      buttonApply?.removeAttribute('disabled');
+      buttonApply?.removeAttribute('style');
     }
   }
 

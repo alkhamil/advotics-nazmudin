@@ -6,7 +6,9 @@
     <input type="text" id="input" 
         ngxDaterangepickerMd
         (ngModelChange)="onChangeDate()"
-        (click)="onClickDate()" 
+        (click)="onClickDate()"
+        (startDateChanged)="datesUpdatedStart($event)"
+        (endDateChanged)="datesUpdatedEnd($event)"
         [(ngModel)]="filterDate"
         [showCustomRangeLabel]="true" 
         [alwaysShowCalendars]="true"
@@ -17,6 +19,5 @@
         [readOnly]="true"
         [maxDate]="maxDate"
         [linkedCalendars]="true">
-
     <img src="assets/images/ic-chevron-down-alt.svg" class="chevron-down" alt="advotics">
 </label>
