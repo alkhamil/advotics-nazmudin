@@ -193,6 +193,18 @@ $mobile: 900px;
     gap: 10px;
 }
 
+::ng-deep .md-drppicker .buttons .range-invalid {
+    color: #FF4141;
+    align-self: center;
+    font-size: 12px;
+    letter-spacing: 0;
+    display: none;
+}
+
+::ng-deep .md-drppicker .buttons .range-invalid.show {
+    display: flex;
+}
+
 ::ng-deep .md-drppicker .buttons .buttons_input .btn {
     background-color: #31A445 !important;
     min-width: calc(150px - 14px);

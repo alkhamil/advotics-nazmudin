@@ -60,12 +60,23 @@ export class CustomDaterangepickerComponent implements OnInit {
     const rangeCount = endDate.diff(startDate, 'days');
     const mdDrppicker = document.querySelector('.md-drppicker');
     const buttonApply = mdDrppicker?.querySelector('.buttons .buttons_input .btn');
+
+    const msgNode = document.createElement('b');
+    msgNode.classList.add('range-invalid');
+    msgNode.textContent = '*Range minimum 1 day';
+
+    if (!mdDrppicker?.querySelector('.range-invalid')) {
+      mdDrppicker?.querySelector('.buttons')?.append(msgNode);
+    }
+
     if (rangeCount < this.minRange) {
       buttonApply?.setAttribute('disabled', 'disabled');
       buttonApply?.setAttribute('style', 'cursor: not-allowed');
+      mdDrppicker?.querySelector('.range-invalid')?.classList.add('show');
     } else {
       buttonApply?.removeAttribute('disabled');
       buttonApply?.removeAttribute('style');
+      mdDrppicker?.querySelector('.range-invalid')?.classList.remove('show');
     }
   }
 
