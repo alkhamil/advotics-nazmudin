@@ -1,7 +1,8 @@
 <div class="dashboard">
     <div class="title">
         <h4>Dashboard</h4>
-        <app-custom-daterangepicker class="datepicker" (onChangeModel)="onChangeDate($event)"></app-custom-daterangepicker>
+        <app-custom-daterangepicker class="datepicker" (onChangeModel)="onChangeDate($event)">
+        </app-custom-daterangepicker>
     </div>
 
     <div class="insight">
@@ -19,30 +20,50 @@
 
         <div class="content">
             <div class="insight-counting">
-                <ng-container *ngFor="let item of insightCountingData">
+                <ng-container *ngIf="insightCountingData$ | async as insightCountingData; else insightCountingDataElse">
+                    <ng-container *ngFor="let item of insightCountingData">
+                        <div class="card">
+                            <div class="card-header">
+                                <span>{{ item.name }}</span>
+                                <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                            </div>
+
+                            <div class="card-body">
+                                <div class="counting-info">
+                                    <span class="amount">{{ item.amount | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
+                                    <div class="other">
+                                        <span class="percentage">
+                                            <img [src]="item.percentageIcon" alt="advotics">
+                                            <span>{{ item.percentage }}</span>
+                                        </span>
+                                        <span class="description">{{ item.description }}</span>
+                                    </div>
+                                </div>
+                                <div class="counting-icon">
+                                    <img src="assets/images/sales-turnover.png" alt="advotics">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <ng-template #insightCountingDataElse>
                     <div class="card">
                         <div class="card-header">
-                            <span>{{ item.name }}</span>
-                            <img src="assets/images/ic-more.svg" class="ic-more" alt="advotics">
+                            <div class="skeleton"></div>
                         </div>
 
                         <div class="card-body">
-                            <div class="counting-info">
-                                <span class="amount">{{ item.amount | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
-                                <div class="other">
-                                    <span class="percentage">
-                                        <img [src]="item.percentageIcon" alt="advotics">
-                                        <span>{{ item.percentage }}</span>
-                                    </span>
-                                    <span class="description">{{ item.description }}</span>
-                                </div>
-                            </div>
-                            <div class="counting-icon">
-                                <img src="assets/images/sales-turnover.png" alt="advotics">
-                            </div>
+                            <div class="skeleton" [style.width]="'75%'"></div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="skeleton"></div>
                         </div>
                     </div>
-                </ng-container>
+                </ng-template>
+
+
             </div>
 
             <div class="insight-visual">
@@ -80,18 +101,37 @@
 
                     <div class="card-body">
                         <div class="products">
-                            <ng-container *ngFor="let item of bestSellingSKU; let i = index">
-                                <div class="product-item" [ngClass]="{'active': i == 0}">
-                                    <img [src]="item.image" alt="advotics">
-                                    <div class="product-info">
-                                        <span class="name">{{ item.name }}</span>
-                                        <div class="product-sell">
-                                            <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
-                                            <span class="sold">{{ item.sold }}</span>
+                            <ng-container *ngIf="productData$ | async as productData; else productDataElse1">
+                                <ng-container *ngFor="let item of productData; let i = index">
+                                    <div class="product-item" [ngClass]="{'active': i == 0}">
+                                        <img [src]="item.image" alt="advotics">
+                                        <div class="product-info">
+                                            <span class="name">{{ item.name }}</span>
+                                            <div class="product-sell">
+                                                <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id'
+                                                    }}</span>
+                                                <span class="sold">{{ item.sold }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </ng-container>
+
+                            <ng-template #productDataElse1>
+                                <ng-container *ngFor="let item of [].constructor(4)">
+                                    <div class="product-item">
+                                        <div class="skeleton" [ngStyle]="{'width': '100px', 'height': '80px', 'margin': '0px', 'border-radius': '0.25rem 0rem 0rem 0.25rem'}"></div>
+                                        <div class="product-info">
+                                            <span class="name">
+                                                <div class="skeleton" [style.width]="'40%'"></div>
+                                            </span>
+                                            <div class="product-sell">
+                                                <div class="skeleton" [style.width]="'70%'"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
@@ -103,18 +143,37 @@
 
                     <div class="card-body">
                         <div class="products">
-                            <ng-container *ngFor="let item of topCompetitorSKU; let i = index">
-                                <div class="product-item" [ngClass]="{'active': i == 0}">
-                                    <img [src]="item.image" alt="advotics">
-                                    <div class="product-info">
-                                        <span class="name">{{ item.name }}</span>
-                                        <div class="product-sell">
-                                            <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id' }}</span>
-                                            <span class="sold">{{ item.sold }}</span>
+                            <ng-container *ngIf="productData$ | async as productData; else productDataElse2">
+                                <ng-container *ngFor="let item of productData; let i = index">
+                                    <div class="product-item" [ngClass]="{'active': i == 0}">
+                                        <img [src]="item.image" alt="advotics">
+                                        <div class="product-info">
+                                            <span class="name">{{ item.name }}</span>
+                                            <div class="product-sell">
+                                                <span class="price">{{ item.price | currency:'IDR':'Rp':'1.0-0':'id'
+                                                    }}</span>
+                                                <span class="sold">{{ item.sold }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </ng-container>
+
+                            <ng-template #productDataElse2>
+                                <ng-container *ngFor="let item of [].constructor(4)">
+                                    <div class="product-item">
+                                        <div class="skeleton" [ngStyle]="{'width': '100px', 'height': '80px', 'margin': '0px', 'border-radius': '0.25rem 0rem 0rem 0.25rem'}"></div>
+                                        <div class="product-info">
+                                            <span class="name">
+                                                <div class="skeleton" [style.width]="'40%'"></div>
+                                            </span>
+                                            <div class="product-sell">
+                                                <div class="skeleton" [style.width]="'70%'"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-template>
                         </div>
                     </div>
                 </div>

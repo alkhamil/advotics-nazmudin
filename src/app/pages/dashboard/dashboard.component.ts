@@ -3,6 +3,7 @@ import { DateRange } from 'src/app/shared/custom-daterangepicker/daterange.model
 
 import { Chart, registerables } from 'chart.js';
 import { CurrencyPipe } from '@angular/common';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 Chart.register(...registerables);
 
 interface InsightCountingData {
@@ -25,6 +26,17 @@ interface ProductData {
   sold: number,
   image: string
 }
+
+const INSIGHT_DATA: InsightCountingData[] = [
+  {
+    name: 'Sales Turnover',
+    amount: 3600000,
+    percentage: 13.8,
+    percentageIcon: 'assets/images/ic-down.svg',
+    description: 'last periode in product sold',
+    icon: 'assets/images/sales-turnover.png'
+  }
+]
 
 const PRODUCT_DATA: ProductData[] = [
   {
@@ -66,17 +78,6 @@ const PRODUCT_DATA: ProductData[] = [
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  insightCountingData: InsightCountingData[] = [
-    {
-      name: 'Sales Turnover',
-      amount: 3600000,
-      percentage: 13.8,
-      percentageIcon: 'assets/images/ic-down.svg',
-      description: 'last periode in product sold',
-      icon: 'assets/images/sales-turnover.png'
-    },
-  ];
-
   @ViewChild('barChart') barChart: any;
   barChartCtx: any;
   barChartCanvas: any;
@@ -100,17 +101,44 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  bestSellingSKU: ProductData[] = PRODUCT_DATA;
-  topCompetitorSKU: ProductData[] = PRODUCT_DATA;
+  insightCountingData = new BehaviorSubject<InsightCountingData[]>(INSIGHT_DATA);
+  insightCountingData$!: Observable<InsightCountingData[] | undefined | null>;
+
+  productData = new BehaviorSubject<ProductData[]>(PRODUCT_DATA);
+  productData$!: Observable<ProductData[] | undefined | null>;
 
   valuesBar: number[] = [25, 22, 20, 21, 20, 23, 24];
   valuesLine: number[] = [23, 20, 18, 20, 18, 20, 22];
+
+  isInitial: boolean = false;
 
   constructor(
     private currencyPipe: CurrencyPipe
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.insightCountingData$ = this.insightCountingData;
+    }, 2000);
+
+    setTimeout(() => {
+      this.productData$ = this.productData;
+    }, 3000);
+
+    this.isInitial = true;
+  }
+
+  loadData() {
+    this.insightCountingData$ = of(undefined);
+    this.productData$ = of(undefined);
+
+    setTimeout(() => {
+      this.insightCountingData$ = this.insightCountingData;
+    }, 2000);
+
+    setTimeout(() => {
+      this.productData$ = this.productData;
+    }, 3000);
   }
 
   ngAfterViewInit(): void {
@@ -198,15 +226,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   onChangeDate(event: DateRange) {
-    this.valuesBar = [];
-    this.valuesLine = [];
-    for (let i = 0; i < 7; i++) {
-      this.valuesBar.push(this._getRandomInt());
-      this.valuesLine.push(this._getRandomInt());
+    if (!this.isInitial) {
+      this.valuesBar = [];
+      this.valuesLine = [];
+      for (let i = 0; i < 7; i++) {
+        this.valuesBar.push(this._getRandomInt());
+        this.valuesLine.push(this._getRandomInt());
+      }
+      setTimeout(() => {
+        this.loadChart();
+      }, 1000);
     }
-    setTimeout(() => {
-      this.loadChart();
-    }, 200);
+    this.loadData();
   }
 
   private _getRandomInt(max: number = 25) {
