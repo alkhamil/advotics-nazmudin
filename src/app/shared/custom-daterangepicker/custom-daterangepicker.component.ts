@@ -54,6 +54,12 @@ export class CustomDaterangepickerComponent implements OnInit {
     this.handleDatesUpdated();
   }
 
+  rangeClicked(range: any) {
+    this.startDate = range.dates[0];
+    this.endDate = range.dates[1];
+    this.handleDatesUpdated();
+  }
+
   handleDatesUpdated() {
     const startDate = moment(this.startDate);
     const endDate = moment(this.endDate);

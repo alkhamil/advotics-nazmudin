@@ -9,6 +9,7 @@
         (click)="onClickDate()"
         (startDateChanged)="datesUpdatedStart($event)"
         (endDateChanged)="datesUpdatedEnd($event)"
+        (rangeClicked)="rangeClicked($event)"
         [(ngModel)]="filterDate"
         [showCustomRangeLabel]="true" 
         [alwaysShowCalendars]="true"
